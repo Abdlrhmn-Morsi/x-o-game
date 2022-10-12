@@ -1,25 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:tictaktoe/model/dimensions.dart';
 
 // ignore: must_be_immutable
 class GlassDialoge extends StatelessWidget {
-  var winner;
-  var onTapped;
+  dynamic winner;
+  dynamic onTapped;
   bool isDraw;
   GlassDialoge({
+    Key? key,
     this.winner,
     required this.onTapped,
     this.isDraw = false,
-  });
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child: Container(
-        height: 200,
-        width: 220,
+      child: SizedBox(
+        height: Dimensions.px220,
+        width: Dimensions.px220,
         child: Stack(
           children: [
             // blur effect
@@ -51,17 +52,21 @@ class GlassDialoge extends StatelessWidget {
               children: [
                 isDraw
                     ? Container()
-                    : const Text(
-                        'THE WINNER IS',
-                        style: TextStyle(
+                    : Padding(
+                        padding: EdgeInsets.only(top: Dimensions.px5),
+                        child: Text(
+                          'THE WINNER IS',
+                          style: TextStyle(
                             decoration: TextDecoration.none,
                             color: Colors.white,
-                            fontSize: 22),
+                            fontSize: Dimensions.px22,
+                          ),
+                        ),
                       ),
-                const SizedBox(height: 10),
+                SizedBox(height: Dimensions.px10),
                 //who is the player or drew
                 Container(
-                  padding: const EdgeInsets.all(30),
+                  padding: EdgeInsets.all(Dimensions.px30),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -71,20 +76,20 @@ class GlassDialoge extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                         Colors.black.withOpacity(1),
-                         Colors.grey.shade500.withOpacity(1),
+                        Colors.black.withOpacity(1),
+                        Colors.grey.shade500.withOpacity(1),
                       ],
                     ),
                   ),
                   child: Text(
                     winner,
-                    style: const TextStyle(
+                    style: TextStyle(
                         decoration: TextDecoration.none,
                         color: Colors.white,
-                        fontSize: 35),
+                        fontSize: Dimensions.px35),
                   ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: Dimensions.px10),
                 // play again btn
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -93,9 +98,12 @@ class GlassDialoge extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     onPressed: onTapped,
-                    child: const Text(
+                    child: Text(
                       'play again',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: Dimensions.px20,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

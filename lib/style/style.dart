@@ -8,14 +8,14 @@ abstract class Style {
   );
   static final myFontSplach = GoogleFonts.pressStart2p(
     textStyle:
-        const TextStyle(color: Colors.white, fontSize: 25, letterSpacing: 3),
+        const TextStyle(color: Colors.white, fontSize: 20, letterSpacing: 3),
   );
   static final myFontSplach2 = GoogleFonts.pressStart2p(
     textStyle:
         const TextStyle(color: Colors.white, fontSize: 10, letterSpacing: 3),
   );
   static final PLAYNOW = GoogleFonts.pressStart2p(
-    textStyle: const TextStyle(color: Color(0xffFCD900), letterSpacing: 3),
+    textStyle: const TextStyle(color: Color(0xffFCD900), letterSpacing: 3,fontSize: 12),
   );
 
   static var mainColor = Colors.black;

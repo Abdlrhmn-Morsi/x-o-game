@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:tictaktoe/view/splash_screen.dart';
-import 'controller/choose_controller.dart';
+import 'package:tictaktoe/view/screens/home_view.dart';
 
 void main() {
-  GetStorage.init();
-  ChooseController();
   runApp(const MyGame());
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -21,10 +17,9 @@ class MyGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: HomeView(),
     );
   }
 }

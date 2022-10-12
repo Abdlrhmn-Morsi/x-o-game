@@ -1,19 +1,21 @@
 import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:tictaktoe/model/dimensions.dart';
 import 'package:tictaktoe/style/style.dart';
 import 'package:tictaktoe/view/widgets/glass_dialoge.dart';
 
-class GameView extends StatefulWidget {
-  const GameView({Key? key}) : super(key: key);
+class PlayersGameView extends StatefulWidget {
+  const PlayersGameView({Key? key}) : super(key: key);
 
   @override
-  State<GameView> createState() => _GameViewState();
+  State<PlayersGameView> createState() => _PlayersGameViewState();
 }
 
-class _GameViewState extends State<GameView> {
+class _PlayersGameViewState extends State<PlayersGameView> {
   final ConfettiController _controller = ConfettiController();
   bool isO = true;
+  dynamic theWinner;
   int ohScore = 0;
   int exScore = 0;
   int draw = 0;
@@ -43,9 +45,9 @@ class _GameViewState extends State<GameView> {
           backgroundColor: Style.mainColor,
           body: Column(
             children: [
+              SizedBox(height: Dimensions.px70),
               // who is playing and the score
-              Expanded(
-                  child: Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -53,7 +55,7 @@ class _GameViewState extends State<GameView> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 20),
+                       SizedBox(height: Dimensions.px20),
                       // who is playing
                       RichText(
                         text: TextSpan(
@@ -66,7 +68,7 @@ class _GameViewState extends State<GameView> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                       SizedBox(height: Dimensions.px20),
                       // the score
                       Text(
                         ohScore.toString(),
@@ -78,20 +80,19 @@ class _GameViewState extends State<GameView> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 20),
+                       SizedBox(height: Dimensions.px20),
                       RichText(
                         text: TextSpan(
                           children: [
                             TextSpan(text: 'PLAYER: ', style: Style.myFontOne),
                             TextSpan(
                               text: 'X',
-                              
                               style: isO ? Style.myFontOne : Style.PLAYNOW,
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                       SizedBox(height: Dimensions.px20),
                       Text(
                         exScore.toString(),
                         style: Style.myFontOne,
@@ -99,11 +100,13 @@ class _GameViewState extends State<GameView> {
                     ],
                   )
                 ],
-              )),
+              ),
+              const Spacer(),
               // the grid game
-              Expanded(
-                flex: 3,
+              Padding(
+                padding:  EdgeInsets.only(left: Dimensions.px5, right: Dimensions.px5),
                 child: GridView.builder(
+                    shrinkWrap: true,
                     itemCount: 9,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -116,36 +119,54 @@ class _GameViewState extends State<GameView> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            
-                            border: Border.all(color: Style.litColor,width: 2),
+                            border: Border.all(color: Style.litColor, width: 2),
                           ),
                           child: Center(
                             child: Text(
                               exOroText[index],
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 40),
+                              style:  TextStyle(
+                                  color: Colors.white, fontSize: Dimensions.px40),
                             ),
                           ),
                         ),
                       );
                     }),
               ),
-              // game name & author
-              Expanded(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                    Text(
-                      'TIC TAC TOE',
-                      style: Style.myFontOne,
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'by @abdlrhmnmorsi',
-                      style: Style.myFontOne,
-                      
-                    ),
-                  ]))
+              const Spacer(),
+              //bottom info
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    theWinner == "X"
+                        ? 'X WON!'
+                        : theWinner == "O"
+                            ? 'O WON!'
+                            : draw == 9
+                                ? 'draw'
+                                : 'Your move',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          ohScore = 0;
+                          exScore = 0;
+                          _clear();
+                        });
+                      },
+                      child: const Text(
+                        'Restart',
+                        style: TextStyle(color: Colors.amber),
+                      ))
+                ],
+              ),
+              //bottom title
+              Text(
+                'created by flutter',
+                style: Style.myFontOne,
+              ),
+               SizedBox(height: Dimensions.px20)
             ],
           ),
         ),
@@ -155,7 +176,7 @@ class _GameViewState extends State<GameView> {
           confettiController: _controller,
           blastDirection: pi / 2,
           gravity: 0.1,
-          colors:const [
+          colors: const [
             Color(0xffFCD900),
             Colors.white,
             Colors.black,
@@ -170,13 +191,15 @@ class _GameViewState extends State<GameView> {
     setState(() {
       if (isO && exOroText[index] == '') {
         exOroText[index] = 'O';
+        isO = false;
 
         draw += 1;
       } else if (exOroText[index] == '') {
         exOroText[index] = 'X';
+        isO = true;
+
         draw += 1;
       }
-      isO = !isO;
       _checkWinner();
     });
   }
@@ -243,6 +266,7 @@ class _GameViewState extends State<GameView> {
   }
 
   void _showWinnerDialoge(winnner) {
+    theWinner = winnner;
     showDialog(
       context: context,
       barrierColor: null,
@@ -301,6 +325,7 @@ class _GameViewState extends State<GameView> {
           exOroText[i] = '';
         }
         draw = 0;
+        theWinner = '';
       },
     );
   }

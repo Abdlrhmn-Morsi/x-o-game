@@ -1,7 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:tictaktoe/model/dimensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
 class GlassDialoge extends StatelessWidget {
@@ -19,8 +18,8 @@ class GlassDialoge extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: SizedBox(
-        height: Dimensions.px220,
-        width: Dimensions.px220,
+        height: 170.h,
+        width: 180.w,
         child: Stack(
           children: [
             // blur effect
@@ -53,20 +52,20 @@ class GlassDialoge extends StatelessWidget {
                 isDraw
                     ? Container()
                     : Padding(
-                        padding: EdgeInsets.only(top: Dimensions.px5),
+                        padding: EdgeInsets.only(top: 5.h),
                         child: Text(
                           'THE WINNER IS',
                           style: TextStyle(
                             decoration: TextDecoration.none,
                             color: Colors.white,
-                            fontSize: Dimensions.px22,
+                            fontSize: 18.sp,
                           ),
                         ),
                       ),
-                SizedBox(height: Dimensions.px10),
+                SizedBox(height: 10.h),
                 //who is the player or drew
                 Container(
-                  padding: EdgeInsets.all(Dimensions.px30),
+                  padding: EdgeInsets.all(25.h),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -84,12 +83,13 @@ class GlassDialoge extends StatelessWidget {
                   child: Text(
                     winner,
                     style: TextStyle(
-                        decoration: TextDecoration.none,
-                        color: Colors.white,
-                        fontSize: Dimensions.px35),
+                      decoration: TextDecoration.none,
+                      color: Colors.white,
+                      fontSize: 20.sp,
+                    ),
                   ),
                 ),
-                SizedBox(height: Dimensions.px10),
+                SizedBox(height: 5.h),
                 // play again btn
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -101,7 +101,7 @@ class GlassDialoge extends StatelessWidget {
                     child: Text(
                       'play again',
                       style: TextStyle(
-                        fontSize: Dimensions.px20,
+                        fontSize: 15.sp,
                         color: Colors.white,
                       ),
                     ),

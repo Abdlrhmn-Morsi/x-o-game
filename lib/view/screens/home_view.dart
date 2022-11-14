@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:slide_to_act/slide_to_act.dart';
-import 'package:tictaktoe/model/dimensions.dart';
 import 'package:tictaktoe/view/screens/ai_game_view.dart';
 import 'package:tictaktoe/view/screens/players_game_view.dart';
 import '../../style/style.dart';
@@ -21,16 +21,16 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: Style.mainColor,
       body: Column(
         children: [
-           SizedBox(height: Dimensions.px80),
+          SizedBox(height: 80.h),
           // title
           Text(
-            'TIC TAC TOE',
+            'XO KNIGHT',
             style: Style.myFontSplach,
           ),
           const Spacer(),
           //img
           Container(
-            height: Dimensions.px330,
+            height: 330.h,
             alignment: Alignment.center,
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -42,16 +42,19 @@ class _HomeViewState extends State<HomeView> {
           const Spacer(),
           //btn 1
           Padding(
-            padding:  EdgeInsets.only(left: Dimensions.px20, right: Dimensions.px20,),
+            padding: EdgeInsets.only(
+              left: 20.w,
+              right: 20.w,
+            ),
             child: SlideAction(
-              sliderButtonIconSize: Dimensions.px10,
-              height: Dimensions.px50,
+              sliderButtonIconSize: 10.sp,
+              height: 45.h,
               alignment: Alignment.bottomCenter,
               text: 'Two Players',
               elevation: 6,
               textStyle: GoogleFonts.pressStart2p(
-                  textStyle:  TextStyle(
-                fontSize: Dimensions.px12,
+                  textStyle: TextStyle(
+                fontSize: 12.sp,
                 color: Colors.white,
               )),
               innerColor: Colors.white,
@@ -61,19 +64,22 @@ class _HomeViewState extends State<HomeView> {
               },
             ),
           ),
-           SizedBox(height: Dimensions.px20),
+          SizedBox(height: 20.h),
           //btn 2
           Padding(
-            padding:  EdgeInsets.only(left: Dimensions.px20, right: Dimensions.px20,),
+            padding: EdgeInsets.only(
+              left: 20.w,
+              right: 20.w,
+            ),
             child: SlideAction(
-              sliderButtonIconSize: Dimensions.px10,
-              height: Dimensions.px50,
+              sliderButtonIconSize: 10.sp,
+              height: 45.h,
               alignment: Alignment.bottomCenter,
               text: 'With AI',
               elevation: 6,
               textStyle: GoogleFonts.pressStart2p(
-                  textStyle:  TextStyle(
-                fontSize: Dimensions.px12,
+                  textStyle: TextStyle(
+                fontSize: 12.sp,
                 color: Colors.white,
               )),
               innerColor: Colors.white,
@@ -83,13 +89,13 @@ class _HomeViewState extends State<HomeView> {
               },
             ),
           ),
-           SizedBox(height: Dimensions.px50),
+          SizedBox(height: 50.h),
           //Author
           Text(
             'created by flutter',
             style: Style.myFontSplach2,
           ),
-           SizedBox(height: Dimensions.px20),
+          SizedBox(height: 20.h),
         ],
       ),
     );
